@@ -148,7 +148,7 @@ public class RegisterActivity extends AppCompatActivity {
                         if (!register) {
                             doLoginAndMaybeRegistration(i, true);
                         } else {
-                            reportResult("Failure at user" + i);
+                            reportResult("Failure at user" + i+" "+error.getErrorMessage());
                         }
                     }
                 });
