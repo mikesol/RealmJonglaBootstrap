@@ -70,9 +70,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
-
-    Map<String, String> groupIdToUserRoot = new HashMap<>();
-
+    
     private void makeDummyData(User user, int i) {
         SyncConfiguration userConfig = new SyncConfiguration.Builder(user, RealmJonglaBootstrapApplication.USER_URL).build();
         Realm userRealm = Realm.getInstance(userConfig);
@@ -89,10 +87,7 @@ public class RegisterActivity extends AppCompatActivity {
         for (int j = Math.max(i - usersPerGroup, 0); j < Math.min(i + 1, nUsers - usersPerGroup); j++) {
             final Group group = new Group();
             String id = "group"+j;
-            if (i == j) {
-                groupIdToUserRoot.put(id, user.getIdentity());
-            }
-            group.setId(groupIdToUserRoot.get(id)+"/"+id);
+            group.setId(id);
             group.setName("Group "+j);
             group.setAvatarURL("https://api.adorable.io/avatars/285/group"+j+".png");
             userRealm.executeTransaction(new Realm.Transaction() {
@@ -101,7 +96,7 @@ public class RegisterActivity extends AppCompatActivity {
                     realm.copyToRealmOrUpdate(group);
                 }
             });
-            SyncConfiguration groupConfig = new SyncConfiguration.Builder(user, RealmJonglaBootstrapApplication.makeGroupUrl(groupIdToUserRoot.get(id), id)).build();
+            SyncConfiguration groupConfig = new SyncConfiguration.Builder(user, RealmJonglaBootstrapApplication.makeGroupUrl(id)).build();
             Realm groupRealm = Realm.getInstance(groupConfig);
             final GroupInfo groupInfo = new GroupInfo();
             groupInfo.setId(group.getId());

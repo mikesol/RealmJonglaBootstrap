@@ -27,8 +27,8 @@ public class RealmJonglaBootstrapApplication extends Application {
 
     public static final String AUTH_URL = "http://" + BuildConfig.OBJECT_SERVER_IP + ":9080/auth";
     public static final String USER_URL = "realm://" + BuildConfig.OBJECT_SERVER_IP + ":9080/~/user";
-    public static final String makeGroupUrl(String userId, String groupId) {
-        return "realm://" + BuildConfig.OBJECT_SERVER_IP + ":9080/"+userId+"/groups/"+groupId;
+    public static final String makeGroupUrl(String groupId) {
+        return "realm://" + BuildConfig.OBJECT_SERVER_IP + ":9080/"+groupId;
     }
 
     @Override
